@@ -1,0 +1,33 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>What is my IP</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+</head>
+<body class="bg-slate-900 w-screen h-screen">
+    <div class="flex min-h-full flex-col justify-center px-6 lg:px-8">
+        <div class="sm:mx-auto sm:w-full sm:max-w-sm shadow-lg p-4 bg-slate-800 border border-slate-700 rounded">
+            <h1 class="text-xl font-semibold"><span class="text-white">My ip:</span> <span class="text-sky-400" id="ipv4"></span></h1>
+        </div>
+    </div>
+
+    <script>
+        const myHeaders = new Headers();
+        myHeaders.append("Accept", "application/json");
+
+        const requestOptions = {
+            method: "GET",
+            headers: myHeaders,
+            redirect: "follow"
+        };
+
+        fetch("https://api.ipify.org?format=json", requestOptions)
+        .then((response) => response.json())
+        .then((result) => document.querySelector('#ipv4').innerHTML = result.ip)
+        .catch((error) => console.error(error));
+    </script>
+  
+</body>
+</html>
